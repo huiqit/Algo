@@ -1,0 +1,45 @@
+/* 别读错题了。
+#2 How to judge whether a binary tree is a binary search tree? // class TreeNode {
+// int val;
+// TreeNode left;
+// TreeNode right;
+// }
+// return if a binary tree is binary search tree.
+*/
+
+/*
+Assumption: no
+BST: for every node:
+left subtree (value) < current node's value;
+right subtree (value) > current node's value.
+Here we use recursion to do it.
+base case: root == null -> true
+subproblem: left subtree is BST, right subtree is BST.
+recursion rule: left isBST && right isBST && left<curr<right
+*/
+//Time = O(n), n is the number of the TreeNode. worst case should go through every node
+//Space = O(h), h is the height of this tree. worst case O(n).
+public boolean isBST(TreeNode root) {
+  return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+}
+private boolean isBST(TreeNode root, int min, int max) {
+  if(root == null){
+     return true;
+  }
+  //self
+  if(root < min || root > max) {
+     return false;
+  }
+  return isBST(root.left, min, root.value) && 
+         isBST(root.right, root.value, max);
+}
+
+/*
+root <= min || root >= max
+那我还是一股脑最后return吧。。。。
+return root > min && root < max && isBST() && isBST;
+对range的物理意义要定义清楚了，边界包括与否
+root cause: 因为tree不考虑duplicates，就没想等号的事，直接就给省去了。
+？？？不能是duplicates啊，那就不能等于啊？？？
+o assumption没写
+*/
