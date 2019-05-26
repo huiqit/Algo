@@ -1,4 +1,7 @@
 !!!time complexity
+面试要说全称：depth first search (breath)
+if(set.add(array[i])) !!!!!!!!!!!!!!!!!!!!!!!!!
+
 /*
 #3 Given a string with duplicate letters, how to print out all permutations of the string. 
 Assume the input is not null or "". E..g, input = “aab” → “aab”, “aba”, “baa”
