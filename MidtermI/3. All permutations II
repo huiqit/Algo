@@ -24,7 +24,7 @@ private void permutations(char[] array, int index){
   //use a hashset to record which letter has been used
   HashSet<Character> set = new HashSet<>(); 
   for(int i = index; i < array.length; i++)  {
-    if(!set.contains(array[i])){
+    if(!set.contains(array[i])){ //if(set.add(array[i]))
       set.add(array[i]);
       swap(array, index, i); 
       permutations(array, index + 1);
