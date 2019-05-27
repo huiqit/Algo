@@ -1,0 +1,14 @@
+Q1.1 a^b
+/*
+模块化你的逻辑
+helper function就做helper function的事，error msg在主程序里处理
+
+*/
+/*
+1. 0^0 -> error
+2. 0^negative 
+3. 1/b // b is integer, b == 4, it will be 0 强制转化应发生在分母上（运算之前），而非之后，注意传入-b
+*/
+
+
+
