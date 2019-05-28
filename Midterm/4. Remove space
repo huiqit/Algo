@@ -25,7 +25,7 @@ public String remove(String input) {
     }
   }
   //post process: trailing
-  if(i > 1 && array[i-1] == ' ') {
+  if(i > 1 && array[i-1] == ' ') { //i > 1在干嘛啊，> 0 就行
     return new String(array, 0, i-1);
   } else {
     return new String(array, 0, i);
