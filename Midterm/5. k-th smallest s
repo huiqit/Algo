@@ -37,6 +37,72 @@ public int midterm(int[] A, int[] B, int k) {
   }
   return minHeap.peek();
 }
+//没做出来哈。这还用你做？谁都会
+————————————————————————————————————————————————————————————————————————
+/* 
+1. initial state
+2. generation rule
+3. termination condition
+4. deduplicates
+  A1233
+B  
+2
+3
+*/
+
+public int kSmallest(int[] A, int[] B, int k) {
+  PriorityQueue<Tuple> minHeap = new PriorityQueue<>(new MyComparator());
+  //initial state
+  minHeap.offer(new Tuple(0, 0, A[0] + B[0]));
+  //deduplicates by a visited matrix
+  boolean[][] visited = new boolean[A.length][B.length];
+  visited[0][0] = true;
+  while(k > 1) {
+    Tuple curr = minHeap.poll();
+    k--;
+    int x = curr.x;
+    int y = curr.y;
+    //generation
+    if(x+1 < A.length && !visited[x+1][y]) {
+      minHeap.offer(new Tuple(x+1, y, A[x+1] + B[y]));
+      visited[x+1][y] = true;
+    }
+    if(y+1 < B.length && !visited[x][y+1]) {
+      minHeap.offer(new Tuple(x, y+1, A[x] + B[y+1]));
+      visited[x][y+1] = true;
+    }
+  }
+  return minHeap.peek().value;
+}
+
+class Tuple{
+  int x;
+  int y;
+  int value;
+  public Tuple(int x, int y, int value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+  }
+}
+
+class MyComparator implements Comparator<Tuple> {
+  @Override
+  public int compare(Tuple e1, Tuple e2) {
+    return Integer.compare(e1.value, e2.value);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
