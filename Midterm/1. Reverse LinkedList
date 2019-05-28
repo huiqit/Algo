@@ -46,8 +46,8 @@ public ListNode reverse(ListNode head){
     //reverse the current node
     curr.next = prev;
     //move curr and prev to next one
-    curr = nxt;
-    prev = curr;
+    curr = nxt; //经典错误
+    prev = curr; 
   }
   //the prev node is the last node in the previous LinkedList
   return prev;
