@@ -27,7 +27,7 @@ private boolean isBST(TreeNode root, int min, int max) {
      return true;
   }
   //self
-  if(root < min || root > max) {
+  if(root < min || root > max) { //等于号：duplicates，但是不允许duplicates
      return false;
   }
   return isBST(root.left, min, root.value) && 
