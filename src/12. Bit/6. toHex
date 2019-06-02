@@ -1,0 +1,28 @@
+
+public String toHex(int number) {
+	char[] base = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	StringBuilder res = new StringBuilder("0x");
+	for(int i = 28; i >= 0; i -= 4) {
+		char curr = base[(number >> i) & 0xF];
+		res.append(curr);
+	}
+	return res.toString();
+}
+
+public String toHex(int number) {
+	if(number == 0) {
+		return "0x0";
+	}
+	char[] base = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	StringBuilder res = new StringBuilder();
+	boolean isLeading = true;
+	for(int i = 28; i >= 0; i -= 4) {
+		char curr = base[(number >> i) & 0xF];
+		if(curr != '0' || !isLeading) {
+			isLeading = true;
+			res.append(curr);
+		}
+	}
+	return res.toString();
+}
+
