@@ -26,3 +26,19 @@ public String toHex(int number) {
 	return res.toString();
 }
 
+public String toHex(int number) {
+	if(number == 0) {
+		return "0x0";
+	}
+	char[] base = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	StringBuilder res = new StringBuilder();
+	while(number > 0) {
+		int remainder = number % 16;
+		number = number / 16;
+		res.append(base[remainder]);
+	}
+	res.append("x0"); //反着加进去
+	res.reverse();
+	return res.toString();
+}
+
