@@ -1,0 +1,18 @@
+// ASCII
+
+public boolean allUnique(String word) {
+	int[] bitVector = new int[8];
+	for(int i = 0; i < word.length(); i++) {
+		char curr = word.charAt(i);
+		int row = curr / 32;
+		int col = curr % 32;
+		int weight = 1 << col;
+		if((bitVector[row] & weight) != 0) {
+			return false;
+		}
+		bitVector[row] |= weight;
+	}
+	return true;
+}
+
+	
