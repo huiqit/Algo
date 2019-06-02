@@ -1,0 +1,23 @@
+/*
+Determine if a given integer is power of 2.
+if is: 有且只有1位=1，其他位=0.
+*/
+
+//Method 1. 把所有位加起来，=1，则为true；否则，false
+public boolean isPowerOfTwo(int number) {
+	return number > 0 && countOnes(number) == 1;
+}
+private int countOnes(int number) {
+	int res = 0;
+	while(number > 0) {
+		res += number & 1; //每次取出number的最后一位
+		number >>= 1; //再右移一位
+	}
+	return res;
+}
+
+//Method 2. x & (x-1) == 0
+public boolean isPowerOfTwo(int x) {
+	return x > 0 && ((x & (x-1)) == 0)
+
+
