@@ -1,0 +1,21 @@
+/*
+Determine the number of bits that are different for two given integers.
+Examples: 5(“0101”) and 8(“1000”) has 3 different bits
+*/
+/*
+^: 相同为0，不同为1。-> 有多少1，就有多少位不同
+*/
+
+public int diffBits(int a, int b) {
+	int c = a^b;
+	int count = 0;
+	for(int c; c != 0; c = c >> 1) {
+		count += c & 1;
+	}
+	return count;
+}
+error 1: int c redefine. only can write: int c = a^b
+error 2: assume a and b are positive. it doesn't work for negative, since c>>1 will add 1 for negative number, and forever diff
+-> c = c>>>1
+
+
