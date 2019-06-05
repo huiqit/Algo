@@ -1,0 +1,7 @@
+/*
+eg: dictionary = [ab, cd]
+string: abcd -> true
+*/
+
+public boolean isValid(HashSet<String> dict, String input) {
+	
