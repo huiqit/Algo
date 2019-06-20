@@ -1,0 +1,22 @@
+public TreeNode lca(TreeNode root, TreeNode one, TreeNode two) {
+  /*
+  if(root == null || root == one || root == two) {
+    return root;
+  }
+  */
+  if(root.value > one && root.value > two) {
+    lca(root.left, one, two);
+  }
+  if(root.value < one && root.value < two) {
+    lca(root.right, one, two);
+  }
+  return root;
+}
+  
+  
+  
+  
+  
+  
+  
+  
