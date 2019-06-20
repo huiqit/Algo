@@ -1,0 +1,88 @@
+1. 切绳子问题
+2. 查字典问题
+3. 回文串min cut
+
+// Q1. Max product when cutting rope
+/*
+at least one cut must be made
+n -> m, both integers
+*/
+/*
+eg: 
+_ M[1] = 0/invalid
+_ | _ M[2] = 1 * 1 = max(1, M[1]) * 1
+_ _ | _ M[3] = max(2, M[2]) * 1
+_ | _ _ M[3] = max(1, M[1]) * 2
+_ _ _ | _ M[4] = max(3, M[3]) * 1 | max(2, M[2]) * 2 | max(1, M[1]) * 3
+_ _ _ _ | _ M[5] = max(4, M[4]) * 1 | max(3, M[3]) * 2 | max(2, M[2]) * 3 | max(1, M[1]) * 4
+...
+*/
+public int maxProduct(int length) {
+
+
+// Q2.
+/*
+eg: dictionary = [ab, cd]
+string: abcd -> true
+eg: dict = {bob, cat, rob}
+word: bobcatrob
+
+M[i] represents whether str[0...i] can be split into the words
+
+base case: M[0] = true
+induction rule:
+M[1] = bo
+  case1: bo 不切，就直接查dict
+  case2: b|o 切1刀，左边是左大段，通过M[0]得知；右边是右小段，直接查dict
+M[2] = bob
+  case1: bob 
+  case2: bo|b -> M[2] + 查dict
+  case3: b|ob -> M[1] + 查dict
+
+左大段是去m[] 中找，右小段是直接查dict
+右小段是不可再分
+再分也是可以做的，但是会有重复，就是右大段了
+每次只考虑最后一刀就行，因为再多切的信息已经包含在过往的m[ ] 里了
+*/
+/*
+写代码的坑：
+m[] 是boolean的！！！not int[]
+j是从右往左来切的，但是左大段是m[j], not m[i-j] （过例子）
+如果题目给的是string[]，那需要自己写个contains函数
+substring 小写，substring有2种用法：
+  substring(begin index)
+  substring(beginIndex, endindex): input[i, j). "hamburger".substring(4, 8) returns "urge"
+这里因为i是word本身的index, 有个错位，从1开始，完美错位～
+i = 1: bo, j = 0; substring(0, 1)就是b ?????????????????????
+*/
+public boolean canBreak(String input, String[] dict) {
+  boolean[] m = new boolean[input.length() + 1];
+  m[0] = true;
+  for(int i = 1; i <= input.length(); i++) {
+    for(int j = 0; j < i; j++) {
+      if(m[j] && contains(input.substring(j, i), dict)) {
+        m[i] = true;
+      }
+    }
+    m[i] = false;
+  }
+  return m[input.length()];
+}
+private boolean contains(String input, String[] dict) {
+  for(String s : dict) {
+    if(input.equals(s)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
+
+
+
+
+
+
+
