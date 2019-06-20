@@ -3,5 +3,46 @@ F1. -> sorted array, using binary search
 F2. sliding window of size k
 data structure: deque
 */
+//Time = O(n)
+//Space = O(k+h)
+注意k和tree node个数的关系，要考虑k > number of tree nodes，如果大于的话，那返回的int[] 就不要这么长了(comment掉的那句话)，就得写int[] res = new int[dq.size()];
+另外，deque就存Integer也行。
+
+public int[] kCloest(TreeNode root, double target, int k) {
+  if(root == null) {
+    return new int[];
+  }
+  //int[] res = new int[k];
+  Deque<TreeNode> dq = new ArrayDeque<>();
+  kCloest(root, target, k, dq);
+  int i = 0;
+  int[] res = new int[dq.size()];
+  while(!dq.isEmpty) {
+    res[i++] = dq.pollLast().key;
+  }
+  return res;
+}
+
+// Last 2 5 7 8 10 First
+private void kCloest(TreeNode root, double target, int k, Deque<TreeNode> dq) {
+  if(root == null) {
+    return;
+  }
+  kCloest(root.left, target, k, dq); // in order traverse
+  //process
+  if(dq.size() < k) {
+    dq.offerFirst(root);
+  } else if (dq.size == k) {
+    if(Math.abs(root.key - target) < Math.abs(dq.peekLast().key - target)) {
+      dq.offerFirst(root);
+      dq.pollLast();
+    } else {
+    return;
+    }
+  }
+  kCloest(root.right, target, k, dq);
+}
+
+
 
 
