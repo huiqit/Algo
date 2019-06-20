@@ -12,8 +12,8 @@ Q2. if only one node in the tree, return null. (add a helper function to judge i
 */
 //Q1.
 public TreeNode lca(TreeNode root, TreeNode one, TreeNode two) {
-  if(root == null) {
-	  return;
+  if(root == null || root == one || root == two) {
+	  return root;
 	}
 	TreeNode left = lca(root.left, one, two);
 	TreeNode right = lca(root.right, one, two);
