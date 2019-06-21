@@ -1,7 +1,8 @@
+/* 3题都已test过
 1. 切绳子问题
-2. 查字典问题
-3. 回文串min cut
-
+2. 查字典问题 #99
+3. 回文串min cut #
+*/
 // Q1. Max product when cutting rope
 /*
 at least one cut must be made
@@ -28,7 +29,7 @@ public int maxProduct(int length) {
   int[] m = new int[length+1];
   for(int i = 2; i <= length; i++) {
      for(int j = 1; j < i; j++) {
-       m[i] = Math.max(m[i], Math.max(M[j], j) * (i-j));
+       m[i] = Math.max(m[i], Math.max(m[j], j) * (i-j));
      }
   }
   return m[length];
@@ -149,7 +150,8 @@ public int minCuts(String input) {
       continue;
     }
     for(int j = 1; j < i; j++) {
-      if(m[j] && isPalidrome(input, j, i-1)) {
+      // 写啥呢！傻了！if(m[j] && isPalidrome(input, j, i-1)) {
+      if(isPalidrome(input, j, i-1)) {
         m[i] = Math.min(m[j] + 1, m[i]);
       }
     }
