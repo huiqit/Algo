@@ -1,0 +1,30 @@
+// any node to any node
+/*
+1. from left/right:
+   maxSum of left, 
+   maxSum of right
+   straight line
+2. current level:
+   Max(left, 0) + max(left, 0) + root.value -> update globalMax
+3. report to parent 
+   max(left, right, 0) + root.value
+*/
+
+public int maxSum(TreeNode root) {
+  int[] max = new int[1];
+  helper(root, max);
+  return max[0];
+}
+private int maxSum(TreeNode root, int[] max) {
+  if(root == null) {
+    return 0;
+  }
+  int left = maxSum(root.left, max);
+  int right = maxSum(root.right, max);
+  
+  //update global max
+  int tmpSum = Math.max(left, 0) + Math.max(right, 0) + root.value;
+  max[0] = Math.max(tmpSum, max[0]);
+  
+  return Math.max(left, right, 0) + root.value;
+}
