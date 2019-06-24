@@ -1,0 +1,37 @@
+/*
+from one leaf node to another leaf node
+1. what expect from lchild, rchild:
+  the maxPath from leaf node to current node
+2. what to do in current level
+  if current level has <= 1 child, just report to the parent, cannot update globalMax
+  if current level has children, check if we can update globalMax here: left + right + root.value
+3. what to report to the parent
+  the same as 1, (a straight line) Math.max(left, right) + root.value
+*/
+// so the key point is that, we use globalMax to record the maxSumPath, but not the method return value. 
+// the return value of this recursion function, is only used to help us build the process.
+
+public int maxSum(TreeNode root) {
+ int[] max = new int[1];
+ helper(root, max);
+ return max[0];
+}
+private int helper(TreeNode root, int[] max) {
+  if(root == null) {
+    return 0;
+  }
+  int left = helper(root.left, max);
+  int right = helper(root.right, max);
+  if(root.left != null && root.right != null) {
+    int tmp = left + right + root.value;
+    max[0] = Math.max(max[0], tmp);
+  }
+  if(root.left == null) {
+    return right + root.value;
+  } else if(root.right == null) {
+    return left + root.value;
+  }
+  return Math.max(left, right) + root.value;
+}
+  
+  
