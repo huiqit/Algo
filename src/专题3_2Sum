@@ -1,0 +1,54 @@
+/*
+
+*/
+// 2-Sum
+// assume no duplicates here
+public int[] twoSum(int[] array, int target) {
+  int[] res = new int[2];
+  if(array == null || array.length < 2) {
+    return res;
+  }
+  Set<Integer> set = new HashSet<>();
+  for(int i = 0; i < array.length; i++) {
+    if(set.add(target-array[i])) { //if contains, return false //no, you cannot add it, 加它干嘛。。要加的是x
+      continue;
+    } else {
+      res[0] = array[i];
+      res[1] = 
+
+}
+
+/* 
+ok, so here you go:
+hashSet只能return boolean(#180), 即判断是否存在这么2个数，如果要返回的是这两个数的大小，也是可以的。但是无法返回the second index.
+若要返回index:
+  1. 在此基础上用hashMap，依旧是O(n)，这就要求array里面没有duplicates
+  map<Key = array[i], Value = index i>
+  （否则不能用hashmap了？好像也可以，key是target-x，value是index，list of index就是了）#leetcode 1
+  2. 不追求Time，i, j loop一下
+  3. 如果有多种结果，那需要返回list of array or List<List<Integer>> (#181) 这里有可能有value是重复的，但是返回的是index. 
+  (若返回value不去重就没意思了啊，去重是下一题）
+  4. 多种结果，return pair of values, 且distinct (#182)
+*/
+public int[] twoSum(int[] array, int target) {
+  if(array == null || array.length < 2) {
+    return new int[]{};
+  }
+  int[] res = new int[2];
+  //key放array里面的数值，value放index
+  Map<Integer, Integer> map = new HashMap<>();
+  for(int i = 0; i < array.length; i++) {
+    if(map.containsKey(target - array[i])) {
+      res[0] = map.get(target - array[i]);
+      res[1] = i;
+      return res;
+    } else {
+      map.put(array[i], i);
+    }
+  }
+  return res;
+}
+    
+  
+  
+  
