@@ -1,1 +1,66 @@
+//
+/*
+1. what you expect from lChild, rChild?
+  whether left subtree is balanced,
+  whether right subtree is balanced,
+  if balanced, the height of left subtree, right subtree
+2. what to do in the current level
+  case1: check left or right is balanced or not
+  case2: check current level is balanced or not
+3. report to parent 
+  the height of current level. Math.max(left, right) + 1.
+*/
 
+//O(nlogn)
+public boolean isBalanced(TreeNode root) {
+  if(root == null) {
+    return true;
+  }
+  
+  boolean leftBalanced = isBalanced(root.left);
+  boolean rightBalanced = isBalanced(root.right);
+  int left = getHeight(root.left);
+  int right = getHeight(root.right);
+  boolean currBalanced = Math.abs(left - right) <= 1;
+  
+  return leftBalanced && rightBalanced && currBalanced;
+}
+private int getHeight(TreeNode root) {
+  if(root == null) {
+    return 0;
+  }
+  int left = getHeight(root.left);
+  int right = getHeight(root.right);
+  return Math.max(left, right) + 1;
+}
+
+//O(n)
+// what you expect from children, the same, -> use -1 to indicates unbalanced
+public boolean isBalanced(TreeNode root) {
+  return getHeightOrUnbalanced(root) >= 0;
+}
+private int getHeightOrUnbalanced(TreeNode root) {
+  if(root == null) {
+    return 0;
+  }
+  
+  int left = getHeightOrUnbalanced(root.left);
+  int right = getHeightOrUnbalanced(root.right);
+  if(left < 0 || right < 0) {
+    return -1;
+  }
+  if(Math.abs(left - right) > 1) {
+    return -1;
+  }
+  return Math.max(left, right) + 1;
+}
+
+
+
+
+
+
+
+
+
+  
