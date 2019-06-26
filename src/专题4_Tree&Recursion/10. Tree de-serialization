@@ -39,4 +39,45 @@ private TreeNode construct(int[] preOrder, int preLeft, int preRight, Map<Intege
 }
 
   
+//level order
+public class Solution {
+  public TreeNode reconstruct(int[] inOrder, int[] levelOrder) {
+    // Write your solution here
+    Map<Integer, Integer> idxMap = new HashMap<>();
+    for(int i = 0; i < inOrder.length; i++) {
+      idxMap.put(inOrder[i], i);
+    }
+    List<Integer> level = new ArrayList<>();
+    for(int a : levelOrder) {
+      level.add(a);
+    }
+    return reconstruct(level, idxMap);
+  }
+  private TreeNode reconstruct(List<Integer> levelOrder, Map<Integer, Integer> idxMap){
+    //base case
+    if(levelOrder.isEmpty()) {
+      return null;
+    }
+    //recursion rule
+    TreeNode root = new TreeNode(levelOrder.remove(0));
+    int rootIdx = idxMap.get(root.key);
+    List<Integer> left = new ArrayList<>();
+    List<Integer> right = new ArrayList<>();
+    for(int ele : levelOrder) {
+      if(idxMap.get(ele) < rootIdx) {
+        left.add(ele);
+      } else {
+        right.add(ele);
+      }
+    }
+
+    root.left = reconstruct(left, idxMap);
+    root.right = reconstruct(right, idxMap);
+
+    return root;
+  }
+}
+
+
+
 
