@@ -1,0 +1,66 @@
+//preOrder
+public class Solution {
+  public TreeNode reconstruct(int[] pre) {
+    //assume not null
+    return reconstruct(pre, 0, pre.length-1);
+  }
+  private TreeNode reconstruct(int[] pre, int left, int right) {
+    //base case
+    if(left > right) {
+      return null;
+    }
+    //recursion rule
+    TreeNode root = new TreeNode(pre[left]);
+    int leftSize = findSmall(pre, left, right);
+    root.left = reconstruct(pre, left+1, left+leftSize);
+    root.right = reconstruct(pre, left+leftSize+1, right);
+    return root;
+  }
+  private int findSmall(int[] pre, int left, int right) {
+    //find how many elements < pre[left], between (pre[left], pre[right])
+    //any corner case? -> handle in the while loop
+    int size = 0;
+    int i = left + 1;
+    while(i <= right && pre[i] < pre[left]) {
+      size++;
+      i++;
+    }
+    return size;
+  }
+}
+
+//postOrder
+/*
+{1, 4, 3, 11, 8, | 5}
+        5
+      /    \
+    3        8
+  /   \        \
+1      4        11
+*/
+public class Solution {
+  public TreeNode reconstruct(int[] post) {
+    return reconstruct(post, 0, post.length-1);
+  }
+  private TreeNode reconstruct(int[] post, int left, int right) {
+    if(left > right) {
+      return null;
+    }
+    TreeNode root = new TreeNode(post[right]);
+    int leftSize = findSmall(post, left, right);
+    root.left = reconstruct(post, left, left+leftSize-1);
+    root.right = reconstruct(post, left+leftSize, right-1); //notice: -1
+    return root;
+  }
+  private int findSmall(int[] array, int left, int right) {
+    //find the element less thant array[right]
+    int size = 0;
+    int i = left;
+    while(i < right && array[i] < array[right]) {
+      size++;
+      i++;
+    }
+    return size;
+  }
+    
+}
