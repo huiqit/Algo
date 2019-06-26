@@ -64,3 +64,50 @@ public class Solution {
   }
     
 }
+
+//level Order 
+/*
+levelorder traversal = {5, 3, 8, 1, 4, 11} -> root is the first element
+the corresponding binary search tree is
+        5
+      /    \
+    3        8
+  /   \        \
+1      4        11
+*/
+
+public class Solution {
+  public TreeNode reconstruct(int[] level) {
+    // Write your solution here
+    List<Integer> l = new ArrayList<>();
+    for(int a : level) {
+      l.add(a);
+    }
+    return reconstruct(l);
+  }
+  private TreeNode reconstruct(List<Integer> level) {
+    if(level.isEmpty()) {
+      return null;
+    }
+    TreeNode root = new TreeNode(level.remove(0));
+    List<Integer> left = new ArrayList<>();
+    List<Integer> right = new ArrayList<>();  
+    for(int ele : level) {
+      if(ele < root.key) {
+        left.add(ele);
+      } else {
+        right.add(ele);
+      }
+    }
+    root.left = reconstruct(left);
+    root.right = reconstruct(right);
+    return root;
+  }
+}
+
+
+
+
+
+
+
