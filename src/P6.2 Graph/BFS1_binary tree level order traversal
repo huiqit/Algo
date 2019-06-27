@@ -1,0 +1,80 @@
+public class TreeNode {
+  private int value;
+  TreeNode left;
+  TreeNode right;
+  TreeNode(int value) {
+    this.value = value;
+  }
+}
+
+//print it
+public void traverse(TreeNode root) {
+  if(root == null) {
+    return;
+  }
+  Queue<Node> queue = new LinkedList<>();
+  queue.offer(root);
+  while(!queue.isEmpty()) {
+    int size = queue.size();
+    for(int i = 0; i < size; i++) {
+      TreeNode tmp = queue.poll();
+      System.out.print(tmp.value);
+      if(tmp.left != null) {
+        queue.offer(tmp.left);
+      }
+      if(tmp.right != null) {
+        queue.offer(tmp.right);
+      }
+    }
+    System.out.println();
+  }
+}
+
+//store into a list of list
+//eg: [[5], [2,3],[6,7,8,9]]
+public List<List<Integer>> traverse(TreeNode root) {
+  List<List<Integer>> res = new ArrayList<>();
+ 
+  if(root == null) {
+    return res;
+  }
+  
+  Queue<TreeNode> q = new ArrayList<>();
+  q.offer(root);
+  while(!q.isEmpty()) {
+    int size = q.size();
+    List<Integer> curr = new ArrayList<>();
+    for(int i = 0; i < size; i++) {
+      TreeNode tmp = q.poll();
+      curr.add(tmp);
+      if(tmp.left != null) {
+        q.offer(tmp.left);
+      }
+      if(tmp.right != null) {
+        q.offer(tmp.right);
+      }
+    }
+    res.add(curr);
+  }
+  return res;
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
