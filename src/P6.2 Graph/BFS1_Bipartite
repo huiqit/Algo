@@ -30,9 +30,9 @@ private boolean isBipartite(GraphNode node, Map<GraphNode, Integer> visited) {
     return true;
   }
   
-  Queue<GraphNode> q = new ArrayList<>();
+  Queue<GraphNode> q = new ArrayDeque<>(); //CANNOT use ArrayList!! if you don't know, just use LinkedList!
   q.offer(node);
-  visitedl.put(node, 0);
+  visited.put(node, 0);
   while(!q.isEmpty()) {
     GraphNode tmp = q.poll();
     int currGroup = visited.get(tmp);
@@ -45,7 +45,8 @@ private boolean isBipartite(GraphNode node, Map<GraphNode, Integer> visited) {
         return false;
       }
     }
-    return true;
   }
+  return true;
+}
 
 
