@@ -5,7 +5,7 @@ public boolean isCompleted(TreeNode root) {
   boolean flag = false; //not havde null
   Queue<TreeNode> q = new ArrayDeque<>();
   q.offer(root);
-  while(q.isEmpty()) {
+  while(q.isEmpty()) {  -> 这里就错了
     TreeNode tmp = q.poll();
     if(tmp.left != null && !flag) {
       q.offer(tmp.left);
@@ -26,4 +26,31 @@ public boolean isCompleted(TreeNode root) {
   return true;
 }
 
+******************
+// 用一个if嵌套，把意思表述清楚。就2个情况
+public class Solution {
+  public boolean isCompleted(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+    
+    boolean nullAppeared = false;
+    Queue<TreeNode> queue = new ArrayDeque<>();
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+      TreeNode node = queue.poll();
+      if (node.left != null) {
+        if (nullAppeared) {
+          return false;
+        } else {
+          queue.offer(node.left);
+        }
+      } else {
+        nullAppeared = true;
+      }
+    }
+    
+    return true;
+  }
+}
     
