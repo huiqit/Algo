@@ -1,3 +1,5 @@
+//Queue<> xx = new ArrayDeque<>(); not ArrayList!
+
 public class TreeNode {
   private int value;
   TreeNode left;
@@ -33,7 +35,7 @@ public void traverse(TreeNode root) {
 //store into a list of list
 //eg: [[5], [2,3],[6,7,8,9]]
 public List<List<Integer>> traverse(TreeNode root) {
-  List<List<Integer>> res = new ArrayList<>();
+  List<List<Integer>> res = new ArrayDeque<>(); 
  
   if(root == null) {
     return res;
@@ -46,7 +48,7 @@ public List<List<Integer>> traverse(TreeNode root) {
     List<Integer> curr = new ArrayList<>();
     for(int i = 0; i < size; i++) {
       TreeNode tmp = q.poll();
-      curr.add(tmp);
+      curr.add(tmp.key); //not just add tmp!
       if(tmp.left != null) {
         q.offer(tmp.left);
       }
