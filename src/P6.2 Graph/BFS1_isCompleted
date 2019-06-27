@@ -2,8 +2,8 @@ public boolean isCompleted(TreeNode root) {
   if(root == null) {
     return true;
   }
-  boolean flag = flase; //not havde null
-  Queue<TreeNode> q = new ArrayList<>();
+  boolean flag = false; //not havde null
+  Queue<TreeNode> q = new ArrayDeque<>();
   q.offer(root);
   while(q.isEmpty()) {
     TreeNode tmp = q.poll();
