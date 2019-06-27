@@ -1,0 +1,29 @@
+public boolean isCompleted(TreeNode root) {
+  if(root == null) {
+    return true;
+  }
+  boolean flag = flase; //not havde null
+  Queue<TreeNode> q = new ArrayList<>();
+  q.offer(root);
+  while(q.isEmpty()) {
+    TreeNode tmp = q.poll();
+    if(tmp.left != null && !flag) {
+      q.offer(tmp.left);
+    } else if(flag) {
+      return false;
+    } else {
+      flag = true;
+    }
+    
+    if(tmp.right != null && !flag) {
+      q.offer(tmp.right);
+    } else if (flag) {
+      return false;
+    } else {
+      flag = true;
+    }
+  }
+  return true;
+}
+
+    
