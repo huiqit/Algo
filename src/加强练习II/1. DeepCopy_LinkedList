@@ -1,0 +1,41 @@
+//copy a linked list
+
+class RandomListNode {
+  public int value;
+  public RandomListNode next;
+  public RandomListNode random;
+  public RandomListNode(int value) {
+    this.value = value;
+  }
+}
+
+public RandomListNode copy(RandomListNode root) {
+  if(root == null) {
+    return root;
+  }
+  
+  Map<RandomListNode, RandomListNode> map = new HashMap<>();
+  RandomListNode head = new RandomListNode(root.value);
+  map.put(root, head);
+  RandomListNode curr = root;
+  while(curr != null) {
+    if(curr.next != null) {
+      if(!map.containsKey(curr.next)) {
+        int tmp = new RandomListNode(curr.next.value);
+        map.put(curr.next, tmp);
+      }
+      map.get(curr).next = map.get(curr.next);
+    }
+    if(curr.random != null) {
+      if(!map.containsKey(curr.random)) {
+        int tmp = new RandomListNode(curr.random.value);
+        map.put(curr.random, tmp);
+      }
+      map.get(curr).random = map.get(curr.random);
+    }
+ 
+    curr = curr.next;
+  }
+  return head;
+}
+
