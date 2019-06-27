@@ -1,0 +1,51 @@
+/*
+Data structure:
+  hashMap: record the node and its group
+  queue: expand and generate the nodes (neighbors)
+group: use 0 and 1
+*/
+
+public class GraphNode {
+  public int key;
+  public List<GraphNode> neighbors;
+  public GraphNode(key) {
+    this.key = key;
+    neighbors = new ArrayList<>();
+  }
+}
+
+public boolean isBipartite(List<GraphNode> graph) {
+  //graph is not null
+  Map<GraphNode, Integer> visited = new HashMap<>();
+  for(GraphNode node : graph) {
+    if(!isBipartite(node, visited)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+private boolean isBipartite(GraphNode node, Map<GraphNode, Integer> visited) {
+  if(visited.containsKey(node)) {
+    return true;
+  }
+  
+  Queue<GraphNode> q = new ArrayList<>();
+  q.offer(node);
+  visitedl.put(node, 0);
+  while(!q.isEmpty()) {
+    GraphNode tmp = q.poll();
+    int currGroup = visited.get(tmp);
+    int neiGroup = currGroup == 0 ? 1 : 0;
+    for(GraphNode nei : tmp.neighbors) {
+      if(!visited.contains(nei)) {
+        visited.put(nei, neiGroup);
+        q.offer(nei);
+      } else if (visited.get(nei) != neiGroup) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
