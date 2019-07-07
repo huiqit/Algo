@@ -1,4 +1,3 @@
-```java
 /* 别读错题了。
 #2 How to judge whether a binary tree is a binary search tree? // class TreeNode {
 // int val;
@@ -44,4 +43,3 @@ root cause: 因为tree不考虑duplicates，就没想等号的事，直接就给
 ？？？不能是duplicates啊，那就不能等于啊？？？
 o assumption没写
 */
-```
