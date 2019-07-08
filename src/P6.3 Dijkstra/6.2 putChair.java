@@ -88,9 +88,8 @@ public class Solution {
     equip = position[equip.x][equip.y];
     equip.distances.add(0);
     minHeap.offer(equip);
-    //set去重，防止同一个cell被再次放入，第一次放入一定是最短路径了，因为这里长度都相等 =1，如果是不等的路径（比如课上例题）就得再次放入
+    //set去重，防止同一个cell被再次放入，第一次放入一定是最短路径了，因为这里长度都相等 =1
     //所以放进去的时候就得给distance赋值，offer cell -> pq的时候就要给distance
-    //set怎么判断两个cell为相等：override hashCode() and equals()!
     Set<Cell> set = new HashSet<>();
     set.add(equip);
     int rows = gym.length; 
