@@ -1,12 +1,4 @@
 public class Solution {
-  /*
-  对每个equipment, run dijkstra，找到到所有点的最短距离，并存在点自己的cell-distance里。
-  why use dijkstra: when you expand a cell, the shortest distance is determined. 
-  这样，对每个equipment做完，比如有3个E，那么每个点里存的这个distances arrayList就是到3个E的最短距离，
-  比如{2, 3, 5} means: 当前cell到E1的最短距离为2，到E2的最短距离为3，到E3的最短距离为5.
-  把这个arraylist加起来，就是当前点到所有E的最短距离之和
-  再用两层循环，找到这个和最小的那个cell。
-  */
   class Cell {
     int x;
     int y;
@@ -40,14 +32,12 @@ public class Solution {
 
     //find all equipments
     List<Cell> equipments = new ArrayList<>();
-    int k = 0; //第几个equipment，按照从左到右，从上到下的顺序排号
     for(int i = 0; i < cols; i++) {
       for(int j = 0; j < rows; j++) {
         if(gym[i][j] == 'E') {
           equipments.add(new Cell(i, j));
-          k++;
         }
-        position[i][j] = new Cell(i, j); //initialize position, 否则无法.x/.y
+        position[i][j] = new Cell(i, j); //必须要initialize position, 否则无法.x/.y，下面拿到position[curr.x][curr.y]那里会出错
       }
     }
 
@@ -56,18 +46,20 @@ public class Solution {
     }
     //对每个cell，把距离加起来
     //同时，比较所有cell的distance，选出最小的那个
-    Cell min = position[0][0];
     int globalMin = Integer.MAX_VALUE;
-    List<Integer> res = Arrays.asList(0, 0);
-    for(int i = 0; i < cols; i++) {
-      for(int j = 0; j < rows; j++) {
+    List<Integer> res = Arrays.asList(-1, -1); //找不到return (-1, -1)
+    for(int i = 0; i < rows; i++) { //根据语义来，我定义的row就是行数
+      for(int j = 0; j < cols; j++) {
         Cell curr = position[i][j];
+        if(curr != 'C') {
+          continue;
+        } //不能放，就直接跳过
         int tmp = 0; //curr cell's distance sum
         for(int m = 0; m < curr.distances.size(); m++) {
           tmp += curr.distances.get(m);
         }
         if(tmp < globalMin) {
-          min = curr;
+          globalMin = tmp;
           res.set(0, i);
           res.set(1, j);
         }
@@ -84,45 +76,48 @@ public class Solution {
         return Integer.compare(c1.distances.get(k), c2.distances.get(k)); 
       }
     });
+    //注意：我们在下面改的cell都是position里的，cell没问题，但是'E'也是能走路的，所以也得存下到其他'E'的距离，否则会有堵死的C，比如(1, 3)
+    //所以把equip先放到position里，以后改的都是position里的了, 且把 distance = 0 放进去
+    /*
+    [[["C","C","E","O","C"],
+      ["C","C","O","C","E"],
+      ["C","C","E","E","C"],
+      ["C","O","C","E","E"],
+      ["C","C","O","C","C"]]]
+    */
+    equip = position[equip.x][equip.y];
+    equip.distances.add(0);
     minHeap.offer(equip);
     //set去重，防止同一个cell被再次放入，第一次放入一定是最短路径了，因为这里长度都相等 =1，如果是不等的路径（比如课上例题）就得再次放入
     //所以放进去的时候就得给distance赋值，offer cell -> pq的时候就要给distance
+    //set怎么判断两个cell为相等：override hashCode() and equals()!
     Set<Cell> set = new HashSet<>();
     set.add(equip);
-    int dist = 0;
-    int rows = gym.length; //y
-    int cols = gym[0].length; //x
+    int rows = gym.length; 
+    int cols = gym[0].length; 
     while(!minHeap.isEmpty()) {
       Cell curr = minHeap.poll();
-      if(gym[curr.x][curr.y] == 'E') {
-        dist = 0;
-      } else {
-        dist = curr.distances.get(k);
-      }
+      dist = curr.distances.get(k);
 
-      if(curr.x + 1 < cols && gym[curr.x+1][curr.y] == 'C' && set.add(position[curr.x+1][curr.y])) {
+      if(curr.x + 1 < rows && gym[curr.x+1][curr.y] != 'O' && set.add(position[curr.x+1][curr.y])) {
         position[curr.x+1][curr.y].distances.add(dist+1); 
         minHeap.offer(position[curr.x+1][curr.y]);
       }
 
-      if(curr.x - 1 >= 0 && gym[curr.x-1][curr.y] == 'C' && set.add(position[curr.x-1][curr.y])) {
+      if(curr.x - 1 >= 0 && gym[curr.x-1][curr.y] != 'O' && set.add(position[curr.x-1][curr.y])) {
         position[curr.x-1][curr.y].distances.add(dist+1); 
         minHeap.offer(position[curr.x-1][curr.y]);
       }
 
-      if(curr.y + 1 < rows && gym[curr.x][curr.y+1] == 'C' && set.add(position[curr.x][curr.y+1])) {
+      if(curr.y + 1 < cols && gym[curr.x][curr.y+1] != 'O' && set.add(position[curr.x][curr.y+1])) {
         position[curr.x][curr.y+1].distances.add(dist+1); 
         minHeap.offer(position[curr.x][curr.y+1]);
       }
 
-      if(curr.y - 1 >= 0 && gym[curr.x][curr.y-1] == 'C' && set.add(position[curr.x][curr.y-1])) {
+      if(curr.y - 1 >= 0 && gym[curr.x][curr.y-1] != 'O' && set.add(position[curr.x][curr.y-1])) {
         position[curr.x][curr.y-1].distances.add(dist+1); 
         minHeap.offer(position[curr.x][curr.y-1]);
       }
-
-      dist++;
     }
-
   }
-
 }
