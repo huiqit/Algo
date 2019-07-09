@@ -5,11 +5,11 @@ draw the matrix picture!!!!!!!
 source:    s t u d e n t
          0 1 2 3 4 5 6 7
        0 0 0 0 0 ...
-i		 e 1 0
-	   f 2 0     
-		 d 3 .      m[i][j]
-	   e 4 .
-	 	 n 5 .
+     e 1 0
+     f 2 0     
+     d 3 .      m[i][j]
+     e 4 .
+     n 5 .
 m[i][j]: i = how many rows, and row index
          j = how many cols, and column index
 */
