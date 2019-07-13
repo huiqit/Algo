@@ -37,6 +37,46 @@ class Point {
   
 }
 
+*******************************************
+
+class Point {
+  int x;
+  int y;
+  public Point(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+  @Override
+  public boolean equals(Object obj) {
+    if(this == obj) {
+      return true;
+    }
+    if(!(obj instanceof Point)) {
+      return false;
+    }
+    Point another = (Point) obj;
+    return this.x == another.x && this.y == another.y;
+  }
+  @Override
+  public int hashCode() {
+    return x*101 + y;
+  }
+}
+
+//common hashCode() implementation
+class Combo {
+  ...
+  @Override
+  public int hashCode() {
+    return a*31*31 + b.hashCode()*31 + c.hashCode;
+  }
+}
+
+
+
+
+
+
 
 
 
