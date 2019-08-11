@@ -21,7 +21,7 @@ class Cat extends Animal {
   
 }
 
-public class Polymophysm {
+public class Polymorphism {
   public static void main(String[] args) {
     System.out.println("Hello");
     new Dog();
