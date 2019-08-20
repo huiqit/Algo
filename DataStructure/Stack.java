@@ -28,35 +28,37 @@ public class Stack {
   }
 }
 
-// using array
+// using bounded array
 public class Stack {
   int head;
-  Integer[] array; 
+  int[] array; 
   //int size;
   public Stack(int cap) {
-    head = 0;
+    head = -1;
     //size = 0;
-    array = new Integer[cap];
+    array = new int[cap];
   }
   
   public Integer pop() {
-    if(head = 0) {
+    if(head = -1) {
       return null;
     }
     Integer res = array[head];
-    head = (head + 1) % array.length;
+    //head = (head + 1) % array.length;
+    head--;
     return res;
+    // --> return head == -1 ? null : array[head--];
   }
   
-  public Integer peek() {
-    if(head == 0) {
+  public Integer top() {
+    if(head == -1) {
       return null;
     }
     return array[head];
   }
   
   public boolean push(int ele) {
-    if(head == array.length) {
+    if(head == array.length-1) {
       return false;
     }
     head = (head + 1) % array.length;
