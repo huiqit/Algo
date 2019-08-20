@@ -1,3 +1,23 @@
+// singly LinkedList
+class LinkedList { 
+  Node head;
+  Node tail;
+  
+  class Node {
+    int vlaue;
+    Node next;
+    public Node(int value) {
+      this.value = value;
+      next = null;
+    }
+  }
+  public LinkedList {
+    head = null;
+    tail = null;
+  }
+}
+    
+
 // double LinkedList
 class DLL {
   Node head;
