@@ -9,8 +9,7 @@ mark visited: 可以另外开一个int[][] matrix来记录；或者在原图上m
 DFS: O(m*n), 
 BFS: O(V+E) 即 O(m*n), 空间复杂度 min(n, m)，queue的最大容量，一圈一圈走的
 然而lc提交显示DFS 1s, BFS 3s. 
-你recursion 走四个方向对吧，那么你dfs最远可能会走一个螺旋路线，你这样画一下是O(m*n)。
-bfs是min(m,n)你每次generate出来的点在queue里最多只能有这么多，你画一个图试着用queue推一下你就会发现generate不出来一层会m*n个点的
+recursion 走四个方向对吧，那么dfs最远可能会走一个螺旋路线，你这样画一下是O(m*n)。
 */
 /*
 dfs的call stack会占多一点，肯定是recursion的压力大;
