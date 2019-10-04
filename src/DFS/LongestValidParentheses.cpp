@@ -7,7 +7,7 @@ class Solution {
       if(s[i] == '(') {
         st.push(i);
       } else {
-        if(s[st.top()] == '(') {
+        if(!st.empty() && s[st.top()] == '(') {
           st.pop();
           res = max(i - (st.empty() ? -1 : st.top()), res);
         } else {
