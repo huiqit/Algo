@@ -14,7 +14,8 @@ class Solution {
     return res;
   }
   private void helper(int k, int m, int n, int kLeft, int mLeft, int nLeft, StringBuilder sb, List<String> res, Deque<Character> stack) {
-    if(k == kLeft && m == mLeft && n == nLeft) {
+    //if(k == kLeft && m == mLeft && n == nLeft) { don't do that
+    if(sb.length() == 2*(m+n+k)){
       res.add(sb.toString());
       return;
     }
