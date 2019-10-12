@@ -16,7 +16,7 @@ class Solution {
       currList.add(s);
       map.put(newS, currList);
     }
-    return new ArrayList<List<String>>(map.values());
+    return new ArrayList<List<String>>(map.values()); //不写<>里面的类型也对
   }
 }
 
