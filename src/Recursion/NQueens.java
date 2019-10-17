@@ -1,59 +1,10 @@
 /*
-TODO:
-1. 优化pass the check -> O(1)
-2. obstacle
+follow up
+1. check valid in O(1)
+2. obstacle 
+   分成subrows
 */
-***********************************************************
- public void Queen(int n){
-        int[] A = new int[n];
-        nQueen(A, 0, n);
-    }
-    private void nQueen(int[] A, int curr_row, int n){
-        if(curr_row == n){
-            print(A);
-            return;
-        }
-        for(int col = 0; col < n; col++){
-            A[curr_row] = col;
-            if(passCheck(A, curr_row)){
-                nQueen(A, curr_row+1, n);
-            }
-        }
-    }
-    private void eightQueen(int[] A, int curr_row){
-        if(curr_row == 8){ //not 7, since 7 + 1
-            print(A);
-            return;
-        }
-        for(int col = 0; col < 8; col++){
-            A[curr_row] = col;
-            if(passCheck(A, curr_row)){
-                eightQueen(A, curr_row+1);
-            }
-        }
-    }
-    private void print(int[] A){
-        for(int a : A){
-            System.out.print(a);
-            System.out.print(' ');
-        }
-        System.out.println(" ");
-    }
-    private boolean passCheck(int[] A, int curr_row){
-        for(int row = 0; row < curr_row; row++){
-            //check 竖着的
-            if(A[row] == A[curr_row]){
-                return false;
-            }
-            //check 斜着的
-            if(Math.abs(A[row]-A[curr_row]) == Math.abs(row - curr_row)) {
-                return false;
-            }
-        }
-        return true;
-    }
-***********************************************************
-//require to return a List<List<Integer>>
+
 public List<List<Integer>> nQueens(int n) {
 	List<List<Integer>> res = new ArrayList<>();
 	List<Integer> curr = new ArrayList<>();
@@ -177,24 +128,5 @@ private void unmark(int j, List<Integer> curr, Set<Integer> col, Set<Integer> di
 }
 ***********************************************************
 注意：mark的时候row = size - 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
