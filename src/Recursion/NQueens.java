@@ -1,4 +1,5 @@
 /*
+https://leetcode.com/problems/n-queens-ii/
 follow up
 1. check valid in O(1)
 2. obstacle 
@@ -33,9 +34,43 @@ class NQueens {
 		return true;
 	}
 }
-	
-	
 
+class NQueens {
+	public int nQueens(int n ) {
+		int[] res = {0};
+		int[] A = new int[n];
+		boolean[] cols = new boolean[n];
+		boolean[] dia = new boolean[2*n-1];
+		boolean[] revDia = new boolean[2*n-1];
+		helper(n, 0, A, res, cols, dia, revDia); //TODO
+		return res[0];
+	}
+	private void helper(int n, int level, int[] A, int[] res, boolean[] cols, boolean[] dia, boolean[]revDia) {
+		if(level == n) {
+			res[0]++;
+			return;
+		}
+		for(int i = 0; i < n; i++) {
+			if(valid(level, i, cols, dia, revDia, n)) { //TODO
+				A[level] = i;
+				markVisited(cols, dia, revDia, level, i, true, n);
+				helper(n, level+1, A, res, cols, dia, revDia);
+				markVisited(cols, dia, revDia, level, i, false, n);
+			}
+		}
+	}
+	private boolean valid(int level, int i, boolean[] cols, boolean[] dia, boolean[] revDia, int n) {
+		// if not visited, valid, return true
+		// int n = dia.length; NO!!!
+		return !cols[i] && !dia[level+i] && !revDia[level-i+n-1];
+	}
+	private void markVisited(boolean[] cols, boolean[] dia, boolean[] revDia, int level, int i, boolean mark, int n) {
+		cols[i] = mark;
+		dia[level+i] = mark;
+		revDia[level+i] = mark;
+	}
+}
+	
 ***********************************************************
 public List<List<Integer>> nQueens(int n) {
 	List<List<Integer>> res = new ArrayList<>();
