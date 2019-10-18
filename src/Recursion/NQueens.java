@@ -5,6 +5,38 @@ follow up
    分成subrows
 */
 
+class NQueens {
+	public int nQueens(int n) {
+		int[] res = new int[]{0};
+		int[] A = new int[n];
+		helper(n, 0, A, res);
+		return res[0];
+	}
+	private void helper(int n, int level, int[] A, int[] res) {
+		if(n == level) {
+			res[0]++;
+			return;
+		}
+		for(int i = 0; i < n; i++) {
+			A[level] = i;
+			if(valid(A, level)) {
+				helper(n, level+1, A, res);
+			}
+		}
+	}
+	private boolean valid(int[] A, int level) {
+		for(int i = 0; i < level; i++) {
+			if(A[i] == A[level] || Math.abs(A[level] - A[i]) == Math.abs(level - i)) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
+	
+	
+
+***********************************************************
 public List<List<Integer>> nQueens(int n) {
 	List<List<Integer>> res = new ArrayList<>();
 	List<Integer> curr = new ArrayList<>();
