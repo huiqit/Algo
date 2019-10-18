@@ -67,7 +67,7 @@ class NQueens {
 	private void markVisited(boolean[] cols, boolean[] dia, boolean[] revDia, int level, int i, boolean mark, int n) {
 		cols[i] = mark;
 		dia[level+i] = mark;
-		revDia[level+i] = mark;
+		revDia[level-i+n-1] = mark;
 	}
 }
 	
