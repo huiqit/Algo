@@ -4,12 +4,18 @@ using namespace std;
 
 class Shape {
 public: 
-  string* name;
+  string* name = NULL;
   float area;
 public:
   Shape() {
     name = new string("shape");
     cout << "shape" << endl;
+  }
+  ~Shape() {
+    cout << "destructor" << endl;
+    if(name) {
+      delete name;
+    }
   }
 };
 
