@@ -1,23 +1,4 @@
-/* 
-先对游戏道具进行描述:
-1. define the class & their relationship
-1）一张牌 card:
-  花色 suit
-  面值/牌面 value
-2）一副牌 deck of cards:
-  List<card>
-2. functionalities
-card
-  - value()
-  - suit()
-deck 
-  - shuffle() 洗牌
-  - dealHead() 发牌
-*/
-/*
-注意：
-class 大写开头（convention)，constructor配套的也大写
-*/
+
 public enum Suit() {
   club,
   diamond,
