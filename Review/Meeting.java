@@ -13,8 +13,9 @@ public int meeting(int[] arrival, int[] departure) {
     n = Math.max(n, d);
   }
   int[] res = {0}; //返回最多meet几个人
-  // 用map记录每个人 - 可以meet的day
   Map<Integer, List<Integer>> map = new HashMap<>();
+  /*
+  // 用map记录每个人 - 可以meet的day
   for(int i = 0; i < arrival.length; i++) {
     int start = arrival[i];
     int end = departure[i];
@@ -24,6 +25,8 @@ public int meeting(int[] arrival, int[] departure) {
     }
     map.put(i, days);
   }
+  */
+  
   // 用map记录每天 - 可以meeting的人
   for(int i = 1; i <= n; i++) {
     List<Integer> res = new ArrayList<>();
@@ -36,7 +39,7 @@ public int meeting(int[] arrival, int[] departure) {
   }
   
   boolean[] visited = new boolean[arrival.length]; //记录哪些人被visited过了
-  helper(n, 1, res, 0, map);
+  helper(n, 1, res, 0, map, visited);
   return res[0];
 }
 // n: days
