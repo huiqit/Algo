@@ -1,62 +1,63 @@
-
-public enum Suit() {
-  club,
-  diamond,
-  heart,
-  spade
+// https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
+public enum Suit {
+  Club,
+  Spade,
+  Diamond,
+  Heart //后面有内容比如constructor 这里就写分号，没内容就不加标点
 }
+
 public class Card {
-  private final int value;
+  private final int faceValue;
   private final Suit suit;
   
-  public Card(int value, Suit suit) {
-    this.value = value;
-    this.suit = suit;
+  public Card(int v, Suit s) {
+    faceValue = v;
+    suit = s;
   }
-  public int getValue() {
-    return value;
+  
+  public void getValue() {
+    return faceValue;
   }
-  public int getSuit() {
+  
+  public void getSuit() {
     return suit;
   }
 }
-  
+
 public class Deck {
-  private final List<Card> cards = new ArrayList<>();
+  List<Card> deck = new ArrayList<>();
   private int dealtIndex = 0;
   
-  public Deck() {
-    for(int i = 1; i <= 13; i++) {
-      for(Suit suit : Suit.values()) {
-        cards.add(new Card(i, suit));
-      }
-    }
-  }
   public void shuffle() {
+    
+  }
   
-  }
-  private int remainingCards() {
-    return cards.size() - dealtIndex;
-  }
-  public Card[] dealHead(int number) {
-    //corner case check
-    if(remainingCards() < number) {
-      return null;
-    }
-    //return the cards that has been dealt
-    Cards[] card = new Card[number];
-    for(int i = 0; i < number; i++) {
-      cards[i] = dealCard();
-    }
-    return cards;
-  }
-  private Card dealCard() {
-    return remainingCards() == 0 ? null : cards.get(dealtIndex++);
+  public Card[] dealHand(int num) {
+    
   }
 }
- 
+
+public class Hand {
+  protected final List<Card> cards = new ArrayList<>();
   
+  public int score() {
+    int score = 0;
+    for(Card card : cards) {
+      score += card.value();
+    }
+    return score;
+  }
   
+  public void addCards(Card[] c) {
+    Collections.addAll(cards, c);
+  }
+  
+  public int size() {
+    return cards.size();
+  }
+}
+
+
   
   
   
